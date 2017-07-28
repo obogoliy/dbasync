@@ -32,12 +32,21 @@
 		<dependency>
 			<groupId>io.reactivex</groupId>
 			<artifactId>rxjava</artifactId>
-			<version>1.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava-reactive-streams</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.github.alaisi.pgasync</groupId>
 			<artifactId>postgres-async-driver</artifactId>
 			<version>0.9</version>
+			<exclusions>
+				<exclusion>
+					<groupId>io.reactivex</groupId>
+					<artifactId>rxjava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -47,10 +56,13 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.18</version>
-			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.davidmoten</groupId>
+			<artifactId>rxjava-jdbc</artifactId>
+			<version>0.7.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>
