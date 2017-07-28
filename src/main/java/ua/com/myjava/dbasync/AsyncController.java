@@ -29,9 +29,9 @@ public class AsyncController {
 				.build();
 	}
 
-	@RequestMapping(path = "/derivative/{isin}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Single<Derivative> findDerivativeAsync(@PathVariable String isin) {
-		return db().querySet("select derivative_isin, product_name from DERIVATIVE_MASTER_DATA")
+	@RequestMapping(path = "/derivative-rxjava-async/{isin}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Single<Derivative> findDerivativeRxJavaAsync(@PathVariable String isin) {
+		return db().querySet("select derivative_isin, product_name from DERIVATIVE_MASTER_DATA where derivative_isin = $1", isin)
 				.map(result -> new Derivative(result.row(0).getString("derivative_isin"), result.row(0).getString("product_name")))
 				.toSingle();
 	}

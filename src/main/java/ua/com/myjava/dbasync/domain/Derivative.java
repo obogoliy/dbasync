@@ -6,6 +6,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class Derivative {
-	private final String isin;
+	private final String derivativeIsin;
 	private final String productName;
 }
