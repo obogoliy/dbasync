@@ -9,6 +9,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,14 +31,14 @@ public class SyncController {
 	}
 
 	@RequestMapping(path = "/derivative-sync/{isin}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Derivative findDerivativeSync(String isin) throws SQLException {
+	public Derivative findDerivativeSync(@PathVariable String isin) throws SQLException {
 		try (Connection connection = basicDataSource().getConnection();
 				PreparedStatement preparedStatement =
 						connection.prepareStatement(
-								"select derivative_isin, product_name form DERIVATIVE_MASTER_DATA where derivative_isin = ?")) {
+								"select derivative_isin, product_name from DERIVATIVE_MASTER_DATA where derivative_isin = ?")) {
 			preparedStatement.setString(1, isin);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet.first()) {
+			if (resultSet.next()) {
 				return new Derivative(resultSet.getString("derivative_isin"), resultSet.getString("product_name"));
 			} else {
 				return null;
