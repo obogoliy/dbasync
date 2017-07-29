@@ -20,7 +20,7 @@ public class AsyncController {
 	@Autowired
 	private RandomIsinService randomIsinService;
 
-	@Bean
+	@Bean(destroyMethod = "close")
 	public Db db() {
 		return new ConnectionPoolBuilder()
 				.hostname("localhost")
@@ -29,14 +29,15 @@ public class AsyncController {
 				.username("postgres")
 				.password("findata")
 				.poolSize(10)
+				.pipeline(true)
 				.build();
 	}
 
 	@RequestMapping(path = "/derivative-async", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Single<Derivative> getRandomDerivative() {
-		return db().querySet("select derivative_isin, product_name from DERIVATIVE_MASTER_DATA where derivative_isin = $1",
+		return db().queryRows("select derivative_isin, product_name from DERIVATIVE_MASTER_DATA where derivative_isin = $1",
 				randomIsinService.getRandomIsin())
-				.map(result -> new Derivative(result.row(0).getString("derivative_isin"), result.row(0).getString("product_name")))
+				.map(result -> new Derivative(result.getString("derivative_isin"), result.getString("product_name")))
 				.toSingle();
 	}
 }
