@@ -34,7 +34,7 @@ public class SyncController {
 	}
 
 	@RequestMapping(path = "/derivative-sync", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Derivative findDerivativeSync() throws SQLException {
+	public Derivative getRandomDerivative() throws SQLException {
 		try (Connection connection = basicDataSource().getConnection();
 				PreparedStatement preparedStatement =
 						connection.prepareStatement(
