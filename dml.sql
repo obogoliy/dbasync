@@ -1,0 +1,15 @@
+INSERT INTO derivative_master_data VALUES("CH0000000001", "Product 1");
+INSERT INTO derivative_master_data VALUES("CH0000000002", "Product 2");
+INSERT INTO derivative_master_data VALUES("CH0000000003", "Product 3");
+INSERT INTO derivative_master_data VALUES("CH0000000004", "Product 4");
+INSERT INTO derivative_master_data VALUES("CH0000000005", "Product 5");
+INSERT INTO derivative_master_data VALUES("CH0000000006", "Product 6");
+INSERT INTO derivative_master_data VALUES("CH0000000007", "Product 7");
+INSERT INTO derivative_master_data VALUES("CH0000000008", "Product 8");
+INSERT INTO derivative_master_data VALUES("CH0000000008", "Product 9");
+INSERT INTO derivative_master_data VALUES("CH0000000010", "Product 10");
+INSERT INTO derivative_master_data VALUES("CH0000000011", "Product 11");
+INSERT INTO derivative_master_data VALUES("CH0000000012", "Product 12");
+INSERT INTO derivative_master_data VALUES("CH0000000013", "Product 13");
+INSERT INTO derivative_master_data VALUES("CH0000000014", "Product 14");
+INSERT INTO derivative_master_data VALUES("CH0000000015", "Product 15");
