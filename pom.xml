@@ -76,6 +76,26 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>${dbcp.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-core</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-rx-java</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-mysql-postgresql-client</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
