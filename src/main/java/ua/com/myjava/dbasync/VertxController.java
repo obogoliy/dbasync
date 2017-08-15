@@ -20,7 +20,7 @@ import ua.com.myjava.dbasync.domain.Derivative;
 @RestController
 public class VertxController {
 	@Autowired
-	private RandomIsinService randomIsinService;
+	private RandomIsinGenerator randomIsinGenerator;
 
 	@Bean
 	public AsyncSQLClient client() {
@@ -38,8 +38,8 @@ public class VertxController {
 	public Single<Derivative> getRandomDerivative() {
 		return client().rxGetConnection().flatMap(conn -> {
 			Single<Derivative> resa =
-					conn.rxQueryWithParams("select derivative_isin, product_name from DERIVATIVE_MASTER_DATA where derivative_isin = ?",
-							new JsonArray().add(randomIsinService.getRandomIsin()))
+					conn.rxQueryWithParams("select derivative_isin, product_name from derivatives where derivative_isin = ?",
+							new JsonArray().add(randomIsinGenerator.getRandomIsin()))
 							.map(result -> new Derivative(result.getRows().get(0).getString("derivative_isin"),
 									result.getRows().get(0).getString("product_name")));
 			return resa.doAfterTerminate(conn::close);

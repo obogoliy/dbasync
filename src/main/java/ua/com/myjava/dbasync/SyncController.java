@@ -20,7 +20,7 @@ import ua.com.myjava.dbasync.domain.Derivative;
 @RestController
 public class SyncController {
 	@Autowired
-	private RandomIsinService randomIsinService;
+	private RandomIsinGenerator randomIsinGenerator;
 
 	@Bean(destroyMethod = "close")
 	public BasicDataSource basicDataSource() {
@@ -38,8 +38,8 @@ public class SyncController {
 		try (Connection connection = basicDataSource().getConnection();
 				PreparedStatement preparedStatement =
 						connection.prepareStatement(
-								"select derivative_isin, product_name from DERIVATIVE_MASTER_DATA where derivative_isin like ?")) {
-			preparedStatement.setString(1, randomIsinService.getRandomIsin());
+								"select derivative_isin, product_name from derivatives where derivative_isin like ?")) {
+			preparedStatement.setString(1, randomIsinGenerator.getRandomIsin());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				return new Derivative(resultSet.getString("derivative_isin"), resultSet.getString("product_name"));

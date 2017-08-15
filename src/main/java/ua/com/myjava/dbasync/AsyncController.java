@@ -18,7 +18,7 @@ import ua.com.myjava.dbasync.domain.Derivative;
 @RestController
 public class AsyncController {
 	@Autowired
-	private RandomIsinService randomIsinService;
+	private RandomIsinGenerator randomIsinGenerator;
 
 	@Bean(destroyMethod = "close")
 	public Db db() {
@@ -35,8 +35,8 @@ public class AsyncController {
 
 	@RequestMapping(path = "/derivative-async", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Single<Derivative> getRandomDerivative() {
-		return db().queryRows("select derivative_isin, product_name from DERIVATIVE_MASTER_DATA where derivative_isin = $1",
-				randomIsinService.getRandomIsin())
+		return db().queryRows("select derivative_isin, product_name from derivatives where derivative_isin = $1",
+				randomIsinGenerator.getRandomIsin())
 				.map(result -> new Derivative(result.getString("derivative_isin"), result.getString("product_name")))
 				.toSingle();
 	}
